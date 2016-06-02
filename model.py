@@ -30,6 +30,7 @@ class Cards(db.Model):
     # Some cards have a variable rate
     max_interest_rate = db.Column(db.Float)
 
+    balance_transfer_interest_rate = db.Column(db.Float)
     cash_withdraw_interest_rate = db.Column(db.Float)
     cash_withdraw_fee = db.Column(db.String(40))
     interest_free_period = db.Column(db.Integer) # in days if ballance is paid in full
@@ -56,6 +57,8 @@ class Cards(db.Model):
     eligibility = db.Column(db.Text)
 
     offer_url = db.Column(db.String(255))
+
+    comments = db.Column(db.Text)
 
     last_update = db.Column(db.DateTime)
 
