@@ -1,7 +1,8 @@
 #!/usr/bin/env python2
 
-from flask import Flask
+from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from pprint import pprint
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cc.db'
@@ -13,6 +14,18 @@ class Banks(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     bank_name = db.Column(db.String(40), unique=True)
     bank_country = db.Column(db.String(2))
+
+    def __init__(self, name, country):
+        self.bank_name = name
+        self.bank_country = country
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.bank_name,
+            'country': self.bank_country
+        }
+
 
 # CreditCard Model
 class Cards(db.Model):
@@ -65,7 +78,18 @@ class Cards(db.Model):
 
 db.create_all()
 
+@app.route('/banks', methods=['GET'])
+def get():
+    
+    result = []
+    
+    for bank in Banks.query.all():
+        result.append(bank.to_dict())
+    
+    return jsonify({
+        'banks': result
+    })
 
-# if __name__ == '__main__':
-#   app.debug = True
-#   app.run('0.0.0.0', 8080)
+if __name__ == '__main__':
+  app.debug = True
+  app.run('0.0.0.0', 8080)
