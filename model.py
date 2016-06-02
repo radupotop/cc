@@ -17,23 +17,27 @@ class Banks(db.Model):
 # CreditCard Model
 class Cards(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
+    card_name = db.Column(db.String(255))
 
     bank_id = db.Column(db.Integer, db.ForeignKey('banks.id'))
     bank = db.relationship('Banks', backref = db.backref('banks', lazy='dynamic'))
 
     currency = db.Column(db.String(3))
 
-    # Usually there's a basic interest rate, 
+    # Usually there's a basic annual interest rate,
     # and a higher rate for cash withdrawals
-    interest_rate = db.Column(db.Float)
-    cash_interest_rate = db.Column(db.Float)
-    interest_free_period = db.Column(db.Integer) # in days
+    interest_rate = db.Column(db.Float) # APR
+    # Some cards have a variable rate
+    max_interest_rate = db.Column(db.Float)
+
+    cash_withdraw_interest_rate = db.Column(db.Float)
+    cash_withdraw_fee = db.Column(db.String(40))
+    interest_free_period = db.Column(db.Integer) # in days if ballance is paid in full
     
     monthly_fee = db.Column(db.Float)
     yearly_fee = db.Column(db.Float)
 
     minimum_repayment = db.Column(db.String(60))
-    # repayment_alloc = db.Column(db.String(4))
 
     additional_charges = db.Column(db.Text) # dormancy fee, statement copy, 
     foreign_usage = db.Column(db.Text) # eg. non-sterling fee
@@ -50,6 +54,8 @@ class Cards(db.Model):
     insurance = db.Column(db.Text) # some cards offer insurance on travel or purchases
 
     eligibility = db.Column(db.Text)
+
+    offer_url = db.Column(db.String(255))
 
     last_update = db.Column(db.DateTime)
 
