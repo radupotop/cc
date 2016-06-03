@@ -2,7 +2,6 @@
 
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from pprint import pprint
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cc.db'
@@ -75,21 +74,11 @@ class Cards(db.Model):
 
     last_update = db.Column(db.DateTime)
 
-
-db.create_all()
-
-@app.route('/banks', methods=['GET'])
-def get():
-    
-    result = []
-    
-    for bank in Banks.query.all():
-        result.append(bank.to_dict())
-    
-    return jsonify({
-        'banks': result
-    })
-
-if __name__ == '__main__':
-  app.debug = True
-  app.run('0.0.0.0', 8080)
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.card_name,
+            "bank_id": self.bank_id,
+            "currency": self.currency,
+            "interest_rate": self.interest_rate
+        }
