@@ -13,13 +13,6 @@ class Banks(db.Model):
         self.bank_name = name
         self.bank_country = country
 
-    def to_dict(self):
-        return {
-            'id': self.id,
-            'name': self.bank_name,
-            'country': self.bank_country
-        }
-
 
 # CreditCard Model
 class Cards(db.Model):
@@ -68,15 +61,3 @@ class Cards(db.Model):
     comments = db.Column(db.Text)
 
     last_update = db.Column(db.DateTime)
-
-    def to_dict(self):
-        return {
-            "id": self.id,
-            "name": self.card_name,
-            "bank_id": self.bank_id,
-            "currency": self.currency,
-            "interest_rate": self.interest_rate,
-            "monthly_fee": self.monthly_fee,
-            "yearly_fee": self.yearly_fee,
-            "minimum_repayment": self.minimum_repayment
-        }
