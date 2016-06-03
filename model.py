@@ -1,11 +1,6 @@
-#!/usr/bin/env python2
-
-from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cc.db'
-db = SQLAlchemy(app)
+db = SQLAlchemy()
 
 # Define our models
 
@@ -80,5 +75,8 @@ class Cards(db.Model):
             "name": self.card_name,
             "bank_id": self.bank_id,
             "currency": self.currency,
-            "interest_rate": self.interest_rate
+            "interest_rate": self.interest_rate,
+            "monthly_fee": self.monthly_fee,
+            "yearly_fee": self.yearly_fee,
+            "minimum_repayment": self.minimum_repayment
         }
