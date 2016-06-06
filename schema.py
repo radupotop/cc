@@ -1,6 +1,8 @@
+# https://flask-marshmallow.readthedocs.io/en/latest/
+
 from marshmallow import Schema, fields
-# from marshmallow_sqlalchemy import ModelSchema
 from flask_marshmallow import Marshmallow
+# from marshmallow_sqlalchemy import ModelSchema
 from model import *
 
 ma = Marshmallow()

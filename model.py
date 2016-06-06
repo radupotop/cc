@@ -1,3 +1,5 @@
+# http://flask-sqlalchemy.pocoo.org/2.1/
+
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -8,10 +10,14 @@ class Banks(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     bank_name = db.Column(db.String(40), unique=True)
     bank_country = db.Column(db.String(2))
+    cards = db.relationship('Cards', backref=db.backref('cards', lazy='dynamic'))
 
     def __init__(self, name, country):
         self.bank_name = name
         self.bank_country = country
+
+    def __repr__(self):
+        return '<Bank %s from %s>' % (self.bank_name, self.bank_country)
 
 
 # CreditCard Model
@@ -19,8 +25,7 @@ class Cards(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     card_name = db.Column(db.String(255))
 
-    bank_id = db.Column(db.Integer, db.ForeignKey('banks.id'))
-    bank = db.relationship('Banks', backref = db.backref('banks', lazy='dynamic'))
+    bank_id = db.Column(db.Integer, db.ForeignKey('banks.id'), nullable=False)
 
     currency = db.Column(db.String(3))
 
@@ -61,3 +66,7 @@ class Cards(db.Model):
     comments = db.Column(db.Text)
 
     last_update = db.Column(db.DateTime)
+
+    def __init__(self, **kwargs):
+        for key,val in iter(kwargs):
+            self[key] = val
