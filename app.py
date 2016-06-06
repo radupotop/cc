@@ -8,7 +8,8 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cc.db'
 db.init_app(app)
 
-# db.create_all()
+with app.app_context():
+    db.create_all()
 
 @app.route('/banks', methods=['GET'])
 def getBanks():

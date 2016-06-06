@@ -1,21 +1,14 @@
 from marshmallow import Schema, fields
-from marshmallow_sqlalchemy import ModelSchema
+# from marshmallow_sqlalchemy import ModelSchema
+from flask_marshmallow import Marshmallow
 
-class BankSchema(ModelSchema):
-    id = fields.Int()
-    bank_name = fields.Str()
-    bank_country = fields.Str()
+ma = Marshmallow()
 
-class CardsSchema(ModelSchema):
-    id = fields.Int()
-    name = fields.Str()
-    bank_id = fields.Int()
-    currency = fields.Str()
-    interest_rate = fields.Int()
-    monthly_fee = fields.Int()
+class BankSchema(ma.Schema):
+    id = fields.Str()
+    class Meta:
+        fields = ('id', 'bank_name', 'bank_country')
 
-    # class Meta:
-    #     model = Mdl.Cards
-
-# schema = BankSchema()
-# result = schema.dump(Banks)
+class CardsSchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'name', 'bank_id', 'currency')
