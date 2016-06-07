@@ -8,7 +8,6 @@ from model import *
 ma = Marshmallow()
 
 class BankSchema(ma.Schema):
-    id = fields.Str()
     class Meta:
         model = Banks
         fields = ('id', 'bank_name', 'bank_country')
@@ -16,4 +15,4 @@ class BankSchema(ma.Schema):
 class CardsSchema(ma.Schema):
     class Meta:
         model = Cards
-        fields = ('id', 'name', 'bank_id', 'currency')
+        fields = ('id', 'card_name', 'bank_id', 'currency')

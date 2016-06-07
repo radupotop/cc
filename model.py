@@ -10,7 +10,7 @@ class Banks(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     bank_name = db.Column(db.String(40), unique=True)
     bank_country = db.Column(db.String(2))
-    cards = db.relationship('Cards', backref=db.backref('cards', lazy='dynamic'))
+    cards = db.relationship('Cards', backref=db.backref('cards'))
 
     def __init__(self, name, country):
         self.bank_name = name
@@ -23,10 +23,9 @@ class Banks(db.Model):
 # CreditCard Model
 class Cards(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
-    card_name = db.Column(db.String(255))
-
     bank_id = db.Column(db.Integer, db.ForeignKey('banks.id'), nullable=False)
 
+    card_name = db.Column(db.String(255), nullable=False)
     currency = db.Column(db.String(3))
 
     # Usually there's a basic annual interest rate,
@@ -67,6 +66,7 @@ class Cards(db.Model):
 
     last_update = db.Column(db.DateTime)
 
-    def __init__(self, **kwargs):
-        for key,val in iter(kwargs):
-            self[key] = val
+    def __init__(self, bank_id, card_name, currency):
+        self.bank_id = bank_id
+        self.card_name = card_name
+        self.currency = currency

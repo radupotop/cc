@@ -10,11 +10,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 
-with app.app_context():
-    db.create_all()
-
-    db.session.add(Cards(card_name='AMEX', bank_id=1))
-
 @app.route('/banks', methods=['GET'])
 def getBanks():
 
