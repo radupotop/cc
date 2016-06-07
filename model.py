@@ -12,12 +12,13 @@ class Banks(db.Model):
     bank_country = db.Column(db.String(2))
     cards = db.relationship('Cards', backref=db.backref('cards'))
 
+    def __repr__(self):
+        return '<Bank %s from %s>' % (self.bank_name, self.bank_country)
+    
     def __init__(self, name, country):
         self.bank_name = name
         self.bank_country = country
 
-    def __repr__(self):
-        return '<Bank %s from %s>' % (self.bank_name, self.bank_country)
 
 
 # CreditCard Model
@@ -65,6 +66,9 @@ class Cards(db.Model):
     comments = db.Column(db.Text)
 
     last_update = db.Column(db.DateTime)
+
+    def __repr__(self):
+        return '<Card %s from %s in %s>' % (self.card_name, self.bank_id, self.currency)
 
     def __init__(self, bank_id, card_name, currency):
         self.bank_id = bank_id
