@@ -10,7 +10,7 @@ class Banks(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     bank_name = db.Column(db.String(40), unique=True)
     bank_country = db.Column(db.String(2))
-    cards = db.relationship('Cards', backref=db.backref('cards'))
+    cards = db.relationship('Cards', backref=db.backref('bank'))
 
     def __repr__(self):
         return '<Bank %s from %s>' % (self.bank_name, self.bank_country)
