@@ -9,15 +9,15 @@ db = SQLAlchemy()
 class Banks(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     bank_name = db.Column(db.String(40), unique=True)
-    bank_country = db.Column(db.String(2))
+    country = db.Column(db.String(2))
     cards = db.relationship('Cards', backref=db.backref('bank'))
 
     def __repr__(self):
-        return '<Bank %s from %s>' % (self.bank_name, self.bank_country)
+        return '<Bank %s from %s>' % (self.bank_name, self.country)
     
     def __init__(self, name, country):
         self.bank_name = name
-        self.bank_country = country
+        self.country = country
 
 
 
@@ -70,7 +70,6 @@ class Cards(db.Model):
     def __repr__(self):
         return '<Card %s from %s in %s>' % (self.card_name, self.bank_id, self.currency)
 
-    def __init__(self, bank_id, card_name, currency):
-        self.bank_id = bank_id
+    def __init__(self, card_name, currency):
         self.card_name = card_name
         self.currency = currency
