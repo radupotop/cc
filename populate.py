@@ -29,5 +29,9 @@ with app.app_context():
         interst_free_period='60 days',
         minimum_repayment='2%',
         max_credit_limit=22000,
-        eligibility='Must be employed for 3 months minimum.'
+        eligibility='Must be employed for 3 months minimum.',
+        promotion='15% cashback: Emag, Decathlon, Casa Rusu, Praktiker',
+        internet_banking='MyBRD Net, MyBRD Mobile',
+        is_contactless=True,
+        offer_url='https://www.brd.ro/persoane-fizice/carduri/carduri-de-credit/cardul-de-credit-cumvreitu',
     )

@@ -61,6 +61,9 @@ class Cards(db.Model):
 
     eligibility = db.Column(db.Text)
 
+    internet_banking = db.Column(db.String(60))
+    is_contactless = db.Column(db.Boolean())
+
     offer_url = db.Column(db.String(255))
 
     comments = db.Column(db.Text)

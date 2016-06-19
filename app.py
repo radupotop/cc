@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+#
+# Define routes and main application entry point
 
 from flask import Flask, jsonify
 from model import *
