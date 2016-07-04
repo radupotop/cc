@@ -22,7 +22,7 @@ with app.app_context():
     db.session.commit()
 
 
-    brd_cum_vrei_tu = Cards(
+    brd_cvt = Cards(
         card_name='BRD Cum vrei tu',
         type='Mastercard',
         currency='RON',
@@ -44,7 +44,7 @@ with app.app_context():
         currency='RON',
         interest_rate=24.00,
         interst_free_period=56,
-        credit_limit_comment='Pana la de 5 ori salariul, maximum echivalentul a 5000 EUR in RON',
+        credit_limit_comment='De pana la 5 ori venitul lunar, maximum echivalentul a 5000 EUR in RON',
         minimum_repayment='10%, intre 1 si 25 a lunii',
         opening_fee = 0,
         yearly_fee = 25,
