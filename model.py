@@ -9,8 +9,8 @@ db = SQLAlchemy()
 
 class Banks(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
-    bank_name = db.Column(db.String(40), unique=True)
     slug = db.Column(db.String(40), unique=True)
+    bank_name = db.Column(db.String(40))
     long_name = db.Column(db.String(255))
     country = db.Column(db.String(2))
     cards = db.relationship('Cards', backref=db.backref('bank'))
@@ -22,7 +22,7 @@ class Banks(db.Model):
         for key, val in kwargs.items():
             setattr(self, key, val)
 
-        self.slug = utils.slugify(kwargs['bank_name'])
+        self.slug = utils.slugify(kwargs['bank_name'] + '-' + kwargs['country'])
 
 
 # CreditCard Model
