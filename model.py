@@ -71,7 +71,10 @@ class Cards(db.Model):
     rewards = db.Column(db.Text) # regular rewards after the promotion period has expired
     insurance = db.Column(db.Text) # some cards offer insurance on travel or purchases
 
-    eligibility = db.Column(db.Text)
+    # Most cards have eligibility criteria
+    eligibility_employment_months = db.Column(db.Integer) # minimum employment period in months
+    eligibility_min_salary = db.Column(db.Float)
+    eligibility = db.Column(db.Text) # additional description of eligibility criteria
 
     internet_banking = db.Column(db.String(255))
     sms_notif = db.Column(db.String(255))

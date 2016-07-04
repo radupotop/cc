@@ -11,6 +11,7 @@ Best cards for
 * shopping
 * students
 * travel (wizz) 
+* long-term loan
 
 Filter by
 ---------
@@ -35,4 +36,4 @@ Monetization
 Wizard
 ------
 
-Put in your salary figure, current period of employment, etc => cards you are eligible for.
+Put in your salary figure, current period of employment => get cards you are eligible for.
