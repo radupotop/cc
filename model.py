@@ -50,6 +50,9 @@ class Cards(db.Model):
     yearly_fee = db.Column(db.Float)
     other_fees = db.Column(db.String(255))
 
+    # Cards have a minimum repayment amount
+    minimum_repayment_percent = db.Column(db.Integer)
+    minimum_repayment_sum = db.Column(db.Float)
     minimum_repayment = db.Column(db.String(60))
 
     additional_charges = db.Column(db.Text) # dormancy fee, statement copy,
