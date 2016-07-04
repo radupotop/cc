@@ -7,31 +7,39 @@ from app import *
 with app.app_context():
     db.create_all()
 
-    bancpost = Banks.query.filter_by(bank_name='Bancpost_').first()
-    # db.session.add(bancpost)
-    
-    # db.session.add(Banks('Bancpost', 'RO'))
-    # db.session.add(Banks('ING', 'RO'))
-    # db.session.add(Banks('Unicredit', 'RO'))
+    # Banks
+    BRD = Banks(
+        bank_name='BRD GSG',
+        long_name='Banca Romana pentru Dezvoltare',
+        country='RO'
+    )
+    BT = Banks(
+        bank_name='BT',
+        long_name='Banca Transilvania',
+        country='RO'
+    )
+    ING = Banks(
+        bank_name='ING',
+        country='RO'
+    )
+    RAIF = Banks(
+        bank_name='Raiffeisen',
+        country='RO'
+    )
 
-    amex = Cards(card_name='AMEX', currency='GBP')
-    amex.bank = bancpost
 
-    db.session.add(amex)
-
-    db.session.commit()
-
-
+    # Cards
     brd_cvt = Cards(
-        card_name='BRD Cum vrei tu',
+        bank=BRD,
+        card_name='Cum Vrei Tu',
         type='Mastercard',
         currency='RON',
         interest_rate=14.72,
         interst_free_period=60,
         minimum_repayment='2%',
         max_credit_limit=22000,
-        eligibility='Must be employed for 3 months minimum.',
-        promotion='15% cashback: Emag, Decathlon, Casa Rusu, Praktiker',
+        eligibility='Minim 3 luni vechime la angajator',
+        promotion='15% cashback la magazinele partenere: Emag, Decathlon, Casa Rusu, Praktiker, etc.',
         internet_banking='MyBRD Net, MyBRD Mobile pe Android si iOS',
         is_contactless=True,
         offer_url='https://www.brd.ro/persoane-fizice/carduri/carduri-de-credit/cardul-de-credit-cumvreitu',
@@ -39,7 +47,8 @@ with app.app_context():
     )
 
     bt_star_forte = Cards(
-        card_name='BT Star Forte',
+        bank=BT,
+        card_name='Star Forte',
         type='Mastercard',
         currency='RON',
         interest_rate=24.00,
@@ -59,7 +68,8 @@ with app.app_context():
     )
 
     ing_cc = Cards(
-        card_name='ING Credit Card',
+        bank=ING,
+        card_name='Credit Card',
         currency='RON',
         max_credit_limit=35000,
         renew_years=5,
@@ -75,7 +85,8 @@ with app.app_context():
     )
 
     raif_cc = Cards(
-        card_name='Raiffeisen Cardul Standard',
+        bank=RAIF,
+        card_name='Cardul Standard',
         currency='RON',
         type='Mastercard',
         min_credit_limit=700,
@@ -93,3 +104,14 @@ with app.app_context():
         default_charges='Plata intarziata: 20 RON',
         additional_charges='Interogare ATM propriu: 0.75 RON, Interogare ATM alte banci: 2.5 RON',
     )
+
+
+    # Add and commit
+
+    # db.session.add(BRD)
+    # db.session.add(brd_cvt)
+
+    # db.session.add(BT)
+    # db.session.add(bt_star_forte)
+
+    # db.session.commit()

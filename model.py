@@ -1,5 +1,6 @@
 # http://flask-sqlalchemy.pocoo.org/2.1/
 
+import utils
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -9,16 +10,19 @@ db = SQLAlchemy()
 class Banks(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     bank_name = db.Column(db.String(40), unique=True)
+    slug = db.Column(db.String(40), unique=True)
+    long_name = db.Column(db.String(255))
     country = db.Column(db.String(2))
     cards = db.relationship('Cards', backref=db.backref('bank'))
 
     def __repr__(self):
         return '<Bank %s from %s>' % (self.bank_name, self.country)
-    
-    def __init__(self, name, country):
-        self.bank_name = name
-        self.country = country
 
+    def __init__(self, **kwargs):
+        for key, val in kwargs.items():
+            setattr(self, key, val)
+
+        self.slug = utils.slugify(kwargs['bank_name'])
 
 
 # CreditCard Model
@@ -40,7 +44,7 @@ class Cards(db.Model):
     cash_withdraw_interest_rate = db.Column(db.Float)
     cash_withdraw_fee = db.Column(db.String(40))
     interest_free_period = db.Column(db.Integer) # in days if ballance is paid in full
-    
+
     opening_fee = db.Column(db.Float)
     monthly_fee = db.Column(db.Float)
     yearly_fee = db.Column(db.Float)
@@ -48,7 +52,7 @@ class Cards(db.Model):
 
     minimum_repayment = db.Column(db.String(60))
 
-    additional_charges = db.Column(db.Text) # dormancy fee, statement copy, 
+    additional_charges = db.Column(db.Text) # dormancy fee, statement copy,
     foreign_usage = db.Column(db.Text) # eg. non-sterling fee
     default_charges = db.Column(db.Text) # late payment, over-limit, returned payment
 
@@ -60,7 +64,7 @@ class Cards(db.Model):
     renew_years = db.Column(db.Integer)
     allows_additional_cards = db.Column(db.Boolean)
 
-    # Most cards offer some sort of promotion, 
+    # Most cards offer some sort of promotion,
     # like the first three months interest free, or more cashback.
     promotion = db.Column(db.Text)
     promo_duration = db.Column(db.Integer) # promotion duration in months
@@ -82,6 +86,6 @@ class Cards(db.Model):
     def __repr__(self):
         return '<Card %s from %s in %s>' % (self.card_name, self.bank_id, self.currency)
 
-    def __init__(self, card_name, currency):
-        self.card_name = card_name
-        self.currency = currency
+    def __init__(self, **kwargs):
+        for key, val in kwargs.items():
+            setattr(self, key, val)
