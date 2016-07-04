@@ -62,7 +62,7 @@ class Cards(db.Model):
 
     # Most cards offer some sort of promotion, 
     # like the first three months interest free, or more cashback.
-    promotion = db.Column(db.String(255))
+    promotion = db.Column(db.Text)
     promo_duration = db.Column(db.Integer) # promotion duration in months
     rewards = db.Column(db.Text) # regular rewards after the promotion period has expired
     insurance = db.Column(db.Text) # some cards offer insurance on travel or purchases
