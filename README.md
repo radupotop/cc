@@ -1,7 +1,38 @@
 Credit Cards comparison tool
-----------------------------
+============================
+
+For the Romanian market
 
 
-In the future
+Best cards for
+--------------
 
-* Compare credit
+* cashback
+* shopping
+* students
+* travel (wizz) 
+
+Filter by
+---------
+
+* Lowest AER / interest free loan
+* Easiest to get
+
+
+Expansion possibilities
+-----------------------
+
+* Mortgage finder
+* Personal loan
+* Car loan
+
+Monetization
+------------
+
+* Market as public service initially
+* Have banks feature their product proeminently
+
+Wizard
+------
+
+Put in your salary figure, current period of employment, etc => cards you are eligible for.
