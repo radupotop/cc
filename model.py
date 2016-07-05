@@ -72,7 +72,10 @@ class Cards(db.Model):
     promotion = db.Column(db.Text)
     promo_duration = db.Column(db.Integer) # promotion duration in months
     rewards = db.Column(db.Text) # regular rewards after the promotion period has expired
-    insurance = db.Column(db.Text) # some cards offer insurance on travel or purchases
+    
+    interest_fee_installments = db.Column(db.Integer) # number of installments
+    travel_insurance = db.Column(db.String(255)) # some cards offer insurance on travel
+    purchase_protection = db.Column(db.Integer) # number of days for purchase protection
 
     # Most cards have eligibility criteria
     eligibility_employment_months = db.Column(db.Integer) # minimum employment period in months
