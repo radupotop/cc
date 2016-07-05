@@ -22,13 +22,15 @@ class Banks(db.Model):
         for key, val in kwargs.items():
             setattr(self, key, val)
 
-        self.slug = utils.slugify(kwargs['bank_name'] + '-' + kwargs['country'])
+        self.slug = utils.slugify(self.bank_name + '-' + self.country)
 
 
 # CreditCard Model
 class Cards(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     bank_id = db.Column(db.Integer, db.ForeignKey('banks.id'), nullable=False)
+    slug = db.Column(db.String(255))
+    # ref bank
 
     card_name = db.Column(db.String(255), nullable=False)
     type = db.Column(db.Enum('VISA', 'Mastercard', 'Amex', 'JCB'))
@@ -98,3 +100,6 @@ class Cards(db.Model):
     def __init__(self, **kwargs):
         for key, val in kwargs.items():
             setattr(self, key, val)
+
+        self.slug = utils.slugify(self.bank.bank_name + '-' + self.card_name)
+
