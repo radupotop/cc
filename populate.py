@@ -101,7 +101,7 @@ with app.app_context():
         max_credit_limit=20000,
         interest_rate=20.28,
         eligibility_employment_months=3,
-        eligibility='3 luni vechime la locul de munca, Venit minim de 150 EUR pe familie',
+        eligibility='Minim 3 luni vechime la ultimul loc de munca, 1 an vechime in piata muncii, Venit minim de 150 EUR pe familie',
         interst_free_period=56,
         is_contactless=True,
         allows_additional_cards=True,

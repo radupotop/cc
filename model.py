@@ -95,11 +95,10 @@ class Cards(db.Model):
     last_update = db.Column(db.DateTime)
 
     def __repr__(self):
-        return '<Card %s from %s in %s>' % (self.card_name, self.bank_id, self.currency)
+        return '<Card %s from %s in %s>' % (self.card_name, self.bank.bank_name, self.currency)
 
     def __init__(self, **kwargs):
         for key, val in kwargs.items():
             setattr(self, key, val)
 
         self.slug = utils.slugify(self.bank.bank_name + '-' + self.card_name)
-
