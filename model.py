@@ -28,8 +28,8 @@ class Banks(db.Model):
 # CreditCard Model
 class Cards(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
+    slug = db.Column(db.String(255), unique=True)
     bank_id = db.Column(db.Integer, db.ForeignKey('banks.id'), nullable=False)
-    slug = db.Column(db.String(255))
     # ref bank
 
     card_name = db.Column(db.String(255), nullable=False)
