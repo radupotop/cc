@@ -16,13 +16,14 @@ class CardsSchema(ma.Schema):
     class Meta:
         model = Cards
         fields = (
-        	'id',
-        	'slug',
-        	'card_name',
-        	'bank_id',
-        	'type',
-        	'currency',
-        	"interest_rate",
-        	"opening_fee",
-        	"monthly_fee",
+            'id',
+            'slug',
+            'card_name',
+            'bank_id',
+            'type',
+            'currency',
+            'interest_rate',
+            'opening_fee',
+            'monthly_fee',
+            'last_update',
         )

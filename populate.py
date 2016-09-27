@@ -3,6 +3,7 @@
 # Populate db
 
 from app import *
+from datetime import datetime
 
 with app.app_context():
     db.create_all()
@@ -45,6 +46,7 @@ with app.app_context():
         is_contactless=True,
         offer_url='https://www.brd.ro/persoane-fizice/carduri/carduri-de-credit/cardul-de-credit-cumvreitu',
         renew_years=3,
+        last_update=datetime.utcnow(),
     )
 
     bt_star_forte = Cards(
@@ -67,7 +69,7 @@ with app.app_context():
         is_contactless=True,
         allows_additional_cards=True,
         other_fees='http://www.starbt.ro/files/star-forte/comisioane_star_forte.pdf',
-
+        last_update=datetime.utcnow(),
     )
 
     ing_cc = Cards(
@@ -90,6 +92,7 @@ with app.app_context():
         allows_additional_cards=False,
         offer_url='https://www.ing.ro/ingb/persoane-fizice/credite/credit-card.html',
         sms_notif='Plati peste 300 RON',
+        last_update=datetime.utcnow(),
     )
 
     raif_cc = Cards(
@@ -116,6 +119,7 @@ with app.app_context():
         additional_charges='Interogare ATM propriu: 0.75 RON, Interogare ATM alte banci: 2.5 RON',
         travel_insurance='Travel insurance',
         purchase_protection=45,
+        last_update=datetime.utcnow(),
     )
 
 
