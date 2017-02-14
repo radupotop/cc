@@ -25,15 +25,23 @@ class Banks(db.Model):
         self.slug = utils.slugify(self.bank_name + '-' + self.country)
 
 
+# VISA, Mastercard, Amex, JCB
+class CardTypes(db.Model):
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    type_name = db.Column(db.String(255), unique=True)
+    cards = db.relationship('Cards', backref=db.backref('type'))
+
+
 # CreditCard Model
 class Cards(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     slug = db.Column(db.String(255), unique=True)
     bank_id = db.Column(db.Integer, db.ForeignKey('banks.id'), nullable=False)
-    # ref bank
+    card_id = db.Column(db.Integer, db.ForeignKey('card_types.id'))
+    # backref bank
+    # backref type
 
     card_name = db.Column(db.String(255), nullable=False)
-    type = db.Column(db.Enum('VISA', 'Mastercard', 'Amex', 'JCB'))
     currency = db.Column(db.String(3))
 
     # Usually there's a basic annual interest rate,

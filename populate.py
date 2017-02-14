@@ -28,12 +28,16 @@ with app.app_context():
         country='RO'
     )
 
+    Mastercard = CardTypes(
+        type_name='Mastercard'
+    )
+
 
     # Cards
     brd_cvt = Cards(
         bank=BRD,
+        type=Mastercard,
         card_name='Cum Vrei Tu',
-        type='Mastercard',
         currency='RON',
         interest_rate=14.72,
         interst_free_period=60,
@@ -51,8 +55,8 @@ with app.app_context():
 
     bt_star_forte = Cards(
         bank=BT,
+        type=Mastercard,
         card_name='Star Forte',
-        type='Mastercard',
         currency='RON',
         interest_rate=24.00,
         interst_free_period=56,
@@ -97,9 +101,9 @@ with app.app_context():
 
     raif_cc = Cards(
         bank=RAIF,
+        type=Mastercard,
         card_name='Cardul Standard',
         currency='RON',
-        type='Mastercard',
         min_credit_limit=700,
         max_credit_limit=20000,
         interest_rate=20.28,
@@ -125,10 +129,11 @@ with app.app_context():
 
     # Add and commit
 
-    # db.session.add(BRD)
-    # db.session.add(brd_cvt)
+    db.session.add(BRD)
+    db.session.add(Mastercard)
+    db.session.add(brd_cvt)
 
     # db.session.add(BT)
     # db.session.add(bt_star_forte)
 
-    # db.session.commit()
+    db.session.commit()
