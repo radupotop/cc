@@ -3,6 +3,7 @@
 # Populate db
 
 from app import *
+from model import *
 from datetime import datetime
 
 with app.app_context():
@@ -30,6 +31,17 @@ with app.app_context():
 
     Mastercard = CardTypes(
         type_name='Mastercard'
+        # digits = 16
+    )
+
+    Visa = CardTypes(
+        type_name='Visa'
+        # digits = 16
+    )
+
+    AMEX = CardTypes(
+        type_name='AMEX',
+        digits = 15
     )
 
 
@@ -128,9 +140,11 @@ with app.app_context():
 
 
     # Add and commit
+    db.session.add(Visa)
+    db.session.add(Mastercard)
+    db.session.add(AMEX)
 
     db.session.add(BRD)
-    db.session.add(Mastercard)
     db.session.add(brd_cvt)
 
     # db.session.add(BT)

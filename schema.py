@@ -12,6 +12,11 @@ class BankSchema(ma.Schema):
         model = Banks
         fields = ('id', 'slug', 'bank_name', 'country')
 
+class CardTypesSchema(ma.Schema):
+    class Meta:
+        model = CardTypes
+        fields = ('id', 'type_name', 'digits')
+
 class CardsSchema(ma.Schema):
     class Meta:
         model = Cards
@@ -19,11 +24,14 @@ class CardsSchema(ma.Schema):
             'id',
             'slug',
             'card_name',
-            'bank_id',
             'type',
+            'bank',
             'currency',
             'interest_rate',
             'opening_fee',
             'monthly_fee',
             'last_update',
         )
+
+    type = fields.Nested(CardTypesSchema())
+    bank = fields.Nested(BankSchema())

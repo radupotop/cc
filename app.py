@@ -5,6 +5,7 @@
 from flask import Flask, jsonify
 from model import *
 from schema import *
+from pprint import pprint
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cc.db'
@@ -16,16 +17,18 @@ db.init_app(app)
 def getBanks():
 
     sch = BankSchema()
-
-    return jsonify([ sch.dump(bank).data for bank in Banks.query.all() ])
+    data = [ sch.dump(bank).data for bank in Banks.query.all() ]
+    
+    return jsonify(data)
 
 
 @app.route('/cards', methods=['GET'])
 def getCards():
 
     sch = CardsSchema()
-
-    return jsonify([ sch.dump(c).data for c in Cards.query.all() ])
+    data = [ sch.dump(c).data for c in Cards.query.all() ]
+    
+    return jsonify(data)
 
 
 if __name__ == '__main__':

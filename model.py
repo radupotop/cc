@@ -16,7 +16,7 @@ class Banks(db.Model):
     cards = db.relationship('Cards', backref=db.backref('bank'))
 
     def __repr__(self):
-        return '<Bank %s from %s>' % (self.bank_name, self.country)
+        return '<Bank {} from {}>'.format(self.bank_name, self.country)
 
     def __init__(self, **kwargs):
         for key, val in kwargs.items():
@@ -29,7 +29,11 @@ class Banks(db.Model):
 class CardTypes(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     type_name = db.Column(db.String(255), unique=True)
+    digits = db.Column(db.Integer, default=16)
     cards = db.relationship('Cards', backref=db.backref('type'))
+
+    def __repr__(self):
+        return '<CardType {}>'.format(self.type_name)
 
 
 # CreditCard Model
@@ -103,7 +107,7 @@ class Cards(db.Model):
     last_update = db.Column(db.DateTime)
 
     def __repr__(self):
-        return '<Card %s from %s in %s>' % (self.card_name, self.bank.bank_name, self.currency)
+        return '<Card {} from {} in {}>'.format(self.card_name, self.bank.bank_name, self.currency)
 
     def __init__(self, **kwargs):
         for key, val in kwargs.items():
