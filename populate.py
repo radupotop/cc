@@ -90,6 +90,7 @@ with app.app_context():
 
     ing_cc = Cards(
         bank=ING,
+        type=Visa,
         card_name='Credit Card',
         currency='RON',
         max_credit_limit=35000,
@@ -104,7 +105,7 @@ with app.app_context():
         minimum_repayment_percent=5,
         minimum_repayment_sum=50,
         minimum_repayment='5%, 10% sau 15%, minim 50 RON, pe data de 5, 15 sau 25 ale lunii',
-        is_contactless=False,
+        is_contactless=True,
         allows_additional_cards=False,
         offer_url='https://www.ing.ro/ingb/persoane-fizice/credite/credit-card.html',
         sms_notif='Plati peste 300 RON',
