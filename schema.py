@@ -10,7 +10,7 @@ ma = Marshmallow()
 class BankSchema(ma.Schema):
     class Meta:
         model = Banks
-        fields = ('id', 'slug', 'bank_name', 'country')
+        fields = ('id', 'slug', 'bank_name', 'long_name', 'country')
 
 class CardTypesSchema(ma.Schema):
     class Meta:
