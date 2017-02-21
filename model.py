@@ -46,7 +46,7 @@ class Cards(db.Model):
     # backref type
 
     card_name = db.Column(db.String(255), nullable=False)
-    currency = db.Column(db.String(3))
+    currency = db.Column(db.String(3), nullable=False)
 
     # Usually there's a basic annual interest rate,
     # and a higher rate for cash withdrawals
@@ -54,20 +54,22 @@ class Cards(db.Model):
     # Some cards have a variable rate
     max_interest_rate = db.Column(db.Float)
 
+    balance_transfer = db.Column(db.String(255))
     balance_transfer_interest_rate = db.Column(db.Float)
+
     cash_withdraw_interest_rate = db.Column(db.Float)
     cash_withdraw_fee = db.Column(db.String(40))
-    interest_free_period = db.Column(db.Integer) # in days if ballance is paid in full
+    interest_free_days = db.Column(db.Integer) # in days if ballance is paid in full
 
     opening_fee = db.Column(db.Float)
-    monthly_fee = db.Column(db.Float)
     yearly_fee = db.Column(db.Float)
+    monthly_fee = db.Column(db.Float)
     other_fees = db.Column(db.String(255))
 
     # Cards have a minimum repayment amount
     minimum_repayment_percent = db.Column(db.Integer)
     minimum_repayment_sum = db.Column(db.Float)
-    minimum_repayment = db.Column(db.String(60))
+    minimum_repayment = db.Column(db.String(255))
 
     additional_charges = db.Column(db.Text) # dormancy fee, statement copy,
     foreign_usage = db.Column(db.Text) # eg. non-sterling fee
@@ -87,7 +89,7 @@ class Cards(db.Model):
     promo_duration = db.Column(db.Integer) # promotion duration in months
     rewards = db.Column(db.Text) # regular rewards after the promotion period has expired
     
-    interest_fee_installments = db.Column(db.Integer) # number of installments
+    interest_free_installments = db.Column(db.Integer) # number of installments
     travel_insurance = db.Column(db.String(255)) # some cards offer insurance on travel
     purchase_protection = db.Column(db.Integer) # number of days for purchase protection
 
