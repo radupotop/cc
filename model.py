@@ -13,7 +13,6 @@ class Banks(db.Model):
     bank_name = db.Column(db.String(40))
     long_name = db.Column(db.String(255))
     country = db.Column(db.String(2))
-    cards = db.relationship('Cards', backref=db.backref('bank'))
 
     def __repr__(self):
         return '<Bank {} from {}>'.format(self.bank_name, self.country)
@@ -30,7 +29,6 @@ class CardTypes(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     type_name = db.Column(db.String(255), unique=True)
     digits = db.Column(db.Integer, default=16)
-    cards = db.relationship('Cards', backref=db.backref('type'))
 
     def __repr__(self):
         return '<CardType {}>'.format(self.type_name)
@@ -42,8 +40,9 @@ class Cards(db.Model):
     slug = db.Column(db.String(255), unique=True)
     bank_id = db.Column(db.Integer, db.ForeignKey('banks.id'), nullable=False)
     card_id = db.Column(db.Integer, db.ForeignKey('card_types.id'))
-    # backref bank
-    # backref type
+
+    bank = db.relationship('Banks', backref=db.backref('cards'))
+    type = db.relationship('CardTypes', backref=db.backref('cards'))
 
     card_name = db.Column(db.String(255), nullable=False)
     currency = db.Column(db.String(3), nullable=False)
