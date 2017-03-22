@@ -1,4 +1,4 @@
-Credit Cards comparison tool
+Credit Card comparison tool
 ============================
 
 For the Romanian market
@@ -12,6 +12,7 @@ Best cards for
 * students
 * travel (wizz) 
 * long-term loan
+* loyalty points
 
 Filter by
 ---------
